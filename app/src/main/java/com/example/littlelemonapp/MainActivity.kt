@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,7 +35,7 @@ import com.example.littlelemonapp.ui.theme.LittleLemonAppTheme
 
 @Preview
 @Composable
-fun LoginScreen() {
+fun MainComposable() {
     Column(
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top,
@@ -53,17 +55,26 @@ fun LoginScreen() {
             fontSize = 24.sp,
             modifier = Modifier.padding(8.dp)
         )
-        Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.Center) {
-            Button(onClick = { }) {
-                Text(text = stringResource(R.string.order))
-            }
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
             Image(
                 painterResource(R.drawable.woman),
                 contentDescription = "Woman smiling",
                 Modifier
-                    .height(100.dp)
-                    .width(100.dp)
+                    .height(150.dp)
             )
+            Text(
+                stringResource(R.string.description_one),
+                color = Color.White,
+                fontSize = 21.sp,
+                modifier = Modifier.padding(12.dp, 0.dp)
+            )
+        }
+        Button(
+            colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.lemon)),
+            onClick = {}
+
+        ) {
+            Text(text = stringResource(R.string.order))
         }
     }
 }
@@ -75,7 +86,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             LittleLemonAppTheme {
                 //Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                LoginScreen()
+                MainComposable()
                 //}
             }
         }

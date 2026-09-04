@@ -41,12 +41,25 @@ fun HomeScreen() {
     }
 }
 
-@Preview
 @Composable
-fun MenuItem() {
+fun AppScreen() {
     var count by rememberSaveable {
         mutableIntStateOf(0)
     }
+    MenuItem(count, { count++ }, { count-- })
+}
+
+@Preview
+@Composable
+fun MenuItemPreview() {
+    var count by rememberSaveable {
+        mutableIntStateOf(0)
+    }
+    MenuItem(count, onDecrement = { count-- }, onIncrement = { count++ })
+}
+
+@Composable
+fun MenuItem(count: Int, onIncrement: () -> Unit, onDecrement: () -> Unit) {
     Column(
         Modifier
             .background(Color(0xFFEFEDEE))
@@ -61,7 +74,7 @@ fun MenuItem() {
             Modifier
                 .fillMaxWidth(), horizontalArrangement = Arrangement.Center
         ) {
-            IconButton(onClick = { count-- }) {
+            IconButton(onClick = onDecrement) {
                 Icon(painterResource(R.drawable.minus), contentDescription = "Minus")
             }
             Text(
@@ -71,7 +84,7 @@ fun MenuItem() {
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF3E3E33)
             )
-            IconButton(onClick = { count++ }) {
+            IconButton(onClick = onIncrement) {
                 Icon(painterResource(R.drawable.plus), contentDescription = "Plus")
             }
         }
@@ -92,7 +105,7 @@ class MainActivity : ComponentActivity() {
                 // HomeScreen()
                 //}
 
-                MenuItem()
+                AppScreen()
             }
         }
     }

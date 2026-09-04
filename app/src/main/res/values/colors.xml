@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lemon">#FFF4CE14</color>
     <color name="olive">#FF495E57</color>
+    <color name="text_white">#FFEDEFEE</color>
 </resources>

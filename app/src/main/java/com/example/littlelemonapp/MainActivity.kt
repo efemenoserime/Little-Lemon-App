@@ -1,5 +1,6 @@
 package com.example.littlelemonapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,14 +32,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.littlelemonapp.ui.theme.LittleLemonAppTheme
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Preview
 @Composable
 fun HomeScreen() {
-    val context = LocalContext.current
-    Column(
-    ) {
-        UpperPanel()
-        LowerPanel()
+    Scaffold(topBar = { TopBar() }) {
+        val context = LocalContext.current
+        Column(
+        ) {
+            UpperPanel()
+            LowerPanel()
+        }
     }
 }
 
@@ -102,10 +107,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             LittleLemonAppTheme {
                 //Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                // HomeScreen()
+                HomeScreen()
                 //}
 
-                AppScreen()
+               // AppScreen()
             }
         }
     }

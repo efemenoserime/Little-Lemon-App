@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    // Add this line for the full suite of Material Icons
+    implementation(libs.androidx.compose.material.icons.extended)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)

@@ -1,4 +1,5 @@
 plugins {
+    kotlin("plugin.serialization") version "2.4.10"
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
 }
@@ -37,6 +38,8 @@ android {
 
 dependencies {
     // Add this line for the full suite of Material Icons
+    implementation("androidx.navigation:navigation-compose:2.10.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)

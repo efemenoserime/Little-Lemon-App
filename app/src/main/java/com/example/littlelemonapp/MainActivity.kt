@@ -12,22 +12,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -40,13 +36,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.littlelemonapp.ui.theme.LittleLemonAppTheme
-import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Preview
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -62,12 +61,27 @@ fun HomeScreen() {
             val context = LocalContext.current
             Column(
             ) {
-                UpperPanel()
+                UpperPanel(navController)
                 LowerPanel()
             }
         }
     }
 
+
+}
+
+@Composable
+fun CustomNavigation() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, HomeScreenRoute) {
+        composable<HomeScreenRoute> {
+            HomeScreen(navController)
+        }
+
+        composable<MenuListRoute> {
+            MenuListScreen(navController)
+        }
+    }
 
 }
 
@@ -132,7 +146,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             LittleLemonAppTheme {
                 //Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                HomeScreen()
+                CustomNavigation()
+                //HomeScreen()
                 //}
 
                 // AppScreen()

@@ -12,6 +12,9 @@ object HomeScreenRoute : Destinations {
 }
 
 @Serializable
+object SettingsRoute
+
+@Serializable
 object MenuListRoute : Destinations {
     override val route = "MenuList"
 }

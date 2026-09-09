@@ -14,12 +14,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,9 +44,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.littlelemonapp.ui.theme.LittleLemonAppTheme
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Preview
 @Composable
 fun HomeScreen(navController: NavHostController) {
 
@@ -57,7 +61,27 @@ fun HomeScreen(navController: NavHostController) {
             DrawerPanel(drawerState, scope)
         }
     }) {
-        Scaffold(topBar = { TopBar(drawerState, scope) }) {
+        Scaffold(topBar = {
+            TopAppBar(
+                colors = TopAppBarColors(
+                    actionIconContentColor = Color.Black,
+                    containerColor = Color.White,
+                    navigationIconContentColor = Color.Black,
+                    scrolledContainerColor = Color.Yellow,
+                    subtitleContentColor = Color.Gray,
+                    titleContentColor = Color.Black,
+                ),
+                title = { Text("Little Lemon") },
+                navigationIcon = {
+
+                    IconButton(onClick = { scope.launch { drawerState.open() } }) { }
+                    Icon(
+                        painter = painterResource(R.drawable.burger_menu_svgrepo_com),
+                        "Menu Icon"
+                    )
+                },
+            )
+        }) {
             val context = LocalContext.current
             Column(
             ) {
